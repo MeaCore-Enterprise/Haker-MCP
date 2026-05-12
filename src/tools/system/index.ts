@@ -10,6 +10,7 @@ import path from "path";
 import screenshot from "screenshot-desktop";
 import clipboardy from "clipboardy";
 import notifier from "node-notifier";
+import { Jimp } from "jimp";
 import { ToolDefinition, ok, fail } from "../../types/tool.js";
 import { formatUptime } from "../../lib/utils.js";
 
@@ -53,15 +54,54 @@ export const systemInfo: ToolDefinition = {
 
 export const takeScreenshot: ToolDefinition = {
     name: "captura_pantalla",
-    description: "Captura la pantalla y guarda la imagen.",
+    description: "Captura la pantalla. Puede recortar una región y devolver archivo o base64.",
     inputSchema: {
         type: "object",
-        properties: { ruta_destino: { type: "string" } }
+        properties: {
+            ruta_destino: { type: "string", description: "Ruta para guardar la imagen (default: temp)" },
+            formato: {
+                type: "string",
+                enum: ["archivo", "base64"],
+                description: "'archivo' guarda en disco (default), 'base64' devuelve la imagen en base64"
+            },
+            region: {
+                type: "object",
+                properties: {
+                    x: { type: "number", description: "Coord X de la esquina superior izquierda" },
+                    y: { type: "number", description: "Coord Y de la esquina superior izquierda" },
+                    width: { type: "number", description: "Ancho del recorte en píxeles" },
+                    height: { type: "number", description: "Alto del recorte en píxeles" }
+                },
+                description: "Región opcional para recortar la captura"
+            }
+        }
     },
     execute: async (input) => {
         try {
+            const formato = (input.formato as string) || "archivo";
+            const region = input.region as { x: number; y: number; width: number; height: number } | undefined;
+
+            const buf: Buffer = await screenshot();
+
+            let image: any = await Jimp.read(buf);
+
+            if (region) {
+                const r = {
+                    x: Math.round(region.x),
+                    y: Math.round(region.y),
+                    w: Math.round(region.width),
+                    h: Math.round(region.height)
+                };
+                image = image.crop(r);
+            }
+
+            if (formato === "base64") {
+                const base64: string = await image.getBase64("image/jpeg");
+                return ok(base64);
+            }
+
             const dest = (input.ruta_destino as string) || path.join(os.tmpdir(), `screenshot_${Date.now()}.jpg`);
-            await screenshot({ filename: dest });
+            await image.write(dest);
             return ok(`Captura guardada: ${dest}`);
         } catch (e: any) {
             return fail(e.message);

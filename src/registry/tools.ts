@@ -14,6 +14,7 @@ import { securityToolsV4 } from "../tools/security/index.js";
 import { cloudToolsV4 } from "../tools/cloud/index.js";
 import { aiToolsV4 } from "../tools/ai/index.js";
 import { funToolsV4 } from "../tools/fun/index.js";
+import { desktopTools } from "../tools/desktop/index.js";
 
 /**
  * Array unificado de todas las tools
@@ -21,6 +22,7 @@ import { funToolsV4 } from "../tools/fun/index.js";
 export const allTools: ToolDefinition[] = [
     ...filesystemTools,
     ...systemTools,
+    ...desktopTools,
     ...memoryTools,
     ...automationToolsV4,
     ...securityToolsV4,

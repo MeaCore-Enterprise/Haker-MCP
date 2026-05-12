@@ -9,8 +9,7 @@ import os from "os";
 import * as xlsx from "xlsx";
 import { ToolDefinition, ok, fail } from "../../types/tool.js";
 
-// @ts-ignore
-import pdf from "pdf-parse";
+import { PDFParse } from "pdf-parse";
 
 export const generateExcel: ToolDefinition = {
     name: "generar_excel",
@@ -49,8 +48,9 @@ export const readPdf: ToolDefinition = {
     execute: async (input) => {
         try {
             const dataBuffer = await fs.readFile(input.ruta as string);
-            const data = await pdf(dataBuffer);
-            return ok(data.text);
+            const pdf = new PDFParse({ data: dataBuffer });
+            const result = await pdf.getText();
+            return ok(result.text);
         } catch (e: any) {
             return fail(e.message);
         }
