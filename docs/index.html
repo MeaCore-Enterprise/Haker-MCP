@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haker-MCP — Controla tu PC con IA</title>
+    <meta name="description" content="Servidor MCP que expone capacidades reales del sistema a agentes de IA. Control de mouse, pantalla, archivos y más.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="particles-canvas"></div>
+
+    <header class="header">
+        <nav class="header__inner">
+            <a href="#" class="header__logo">
+                <span class="logo-icon">&gt;_</span>
+                <span class="logo-text">Haker<span class="text-accent">MCP</span></span>
+            </a>
+            <div class="header__links">
+                <a href="#que-es" class="header__link">¿Qué es?</a>
+                <a href="#features" class="header__link">Features</a>
+                <a href="#instalacion" class="header__link">Instalación</a>
+                <a href="#tools" class="header__link">Tools</a>
+                <a href="#seguridad" class="header__link">Seguridad</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="hero__badge glow-effect">
+                <span class="badge-dot"></span>
+                Protocolo MCP v1.0
+            </div>
+            <h1 class="hero__title">
+                <span class="hero__title-line">Tu PC,</span>
+                <span class="hero__title-line hero__title-line--accent typewriter" id="typewriter">controlado por IA</span>
+            </h1>
+            <p class="hero__subtitle">Un servidor MCP que expone capacidades reales del sistema a agentes de inteligencia artificial. Mouse, pantalla, archivos, terminal y más — todo desde un solo paquete.</p>
+            <div class="hero__actions">
+                <a href="#instalacion" class="btn btn--primary glow-effect">Empezar ahora</a>
+                <a href="https://github.com/KronoxYT/Haker-MCP" target="_blank" rel="noopener" class="btn btn--secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <div class="hero__stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="32">0</span>
+                    <span class="stat-label">Tools</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="8">0</span>
+                    <span class="stat-label">Categorías</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="0">0</span>
+                    <span class="stat-label">Dependencias*</span>
+                </div>
+            </div>
+            <p class="hero__footnote">* Las tools de mouse usan PowerShell nativo — zero dependencias extra</p>
+            <div class="scroll-indicator">
+                <div class="scroll-indicator__mouse">
+                    <div class="scroll-indicator__wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUÉ ES -->
+        <section class="section" id="que-es">
+            <div class="section__inner">
+                <h2 class="section__title reveal">¿Qué es <span class="text-accent">Haker-MCP</span>?</h2>
+                <p class="section__subtitle reveal">Es un puente entre los agentes de IA y tu sistema operativo. Los LLMs pueden ver, tocar y controlar tu computadora.</p>
+
+                <div class="diagram reveal">
+                    <div class="diagram__node diagram__node--left">
+                        <div class="diagram__icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4Z"/></svg>
+                        </div>
+                        <span>Agente IA</span>
+                        <small>(Claude, Cursor, etc.)</small>
+                    </div>
+                    <div class="diagram__connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow"></div>
+                        <div class="connector-label">MCP Protocol</div>
+                    </div>
+                    <div class="diagram__node diagram__node--center">
+                        <div class="diagram__icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                        </div>
+                        <span>Haker-MCP</span>
+                        <small>Servidor</small>
+                    </div>
+                    <div class="diagram__connector diagram__connector--right">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow"></div>
+                    </div>
+                    <div class="diagram__node diagram__node--right">
+                        <div class="diagram__icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>
+                        </div>
+                        <span>Sistema</span>
+                        <small>Mouse, Archivos, etc.</small>
+                    </div>
+                </div>
+
+                <div class="diagram-mobile">
+                    <div class="diagram-mobile__step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>Agente IA</strong> envía una petición
+                        </div>
+                    </div>
+                    <div class="diagram-mobile__arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="diagram-mobile__step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>Haker-MCP</strong> procesa vía MCP
+                        </div>
+                    </div>
+                    <div class="diagram-mobile__arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="diagram-mobile__step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Sistema</strong> ejecuta la acción
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="section section--dark" id="features">
+            <div class="section__inner">
+                <h2 class="section__title reveal">Capacidades</h2>
+                <p class="section__subtitle reveal">Todo lo que un agente IA puede hacer con Haker-MCP</p>
+
+                <div class="features-grid">
+                    <div class="feature-card reveal" data-tilt>
+                        <div class="feature-card__icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4Z"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Control de Mouse</h3>
+                        <p class="feature-card__desc">Mover, click, arrastrar y scroll. Control total del cursor desde la IA.</p>
+                    </div>
+
+                    <div class="feature-card reveal" data-tilt>
+                        <div class="feature-card__icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Captura de Pantalla</h3>
+                        <p class="feature-card__desc">Captura la pantalla completa o regiones específicas. Devuelve archivo o base64.</p>
+                    </div>
+
+                    <div class="feature-card reveal" data-tilt>
+                        <div class="feature-card__icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Sistema de Archivos</h3>
+                        <p class="feature-card__desc">Leer, escribir y listar archivos. Manipulación completa del sistema de archivos.</p>
+                    </div>
+
+                    <div class="feature-card reveal" data-tilt>
+                        <div class="feature-card__icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Memoria Persistente</h3>
+                        <p class="feature-card__desc">El agente puede memorizar, recordar y reflexionar sobre información entre sesiones.</p>
+                    </div>
+
+                    <div class="feature-card reveal" data-tilt>
+                        <div class="feature-card__icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Ejecución de Comandos</h3>
+                        <p class="feature-card__desc">Ejecuta cualquier comando en la terminal del sistema y captura su salida.</p>
+                    </div>
+
+                    <div class="feature-card reveal" data-tilt>
+                        <div class="feature-card__icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Y mucho más</h3>
+                        <p class="feature-card__desc">Notificaciones, clipboard, procesos, Docker, Wi-Fi, Excel, PDF, y 32 tools en total.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INSTALACIÓN -->
+        <section class="section" id="instalacion">
+            <div class="section__inner">
+                <h2 class="section__title reveal">Instalación <span class="text-accent">Rápida</span></h2>
+                <p class="section__subtitle reveal">3 pasos para tener tu MCP corriendo</p>
+
+                <div class="steps">
+                    <div class="step reveal">
+                        <div class="step__header">
+                            <div class="step__number">1</div>
+                            <div class="step__info">
+                                <h3 class="step__title">Clona el repositorio</h3>
+                                <p class="step__desc">Descarga el código fuente desde GitHub</p>
+                            </div>
+                        </div>
+                        <div class="code-block">
+                            <button class="code-copy" data-copy="git clone https://github.com/KronoxYT/Haker-MCP.git">Copiar</button>
+                            <pre><code><span class="code-prompt">$</span> git clone https://github.com/KronoxYT/Haker-MCP.git</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step reveal">
+                        <div class="step__header">
+                            <div class="step__number">2</div>
+                            <div class="step__info">
+                                <h3 class="step__title">Instala dependencias</h3>
+                                <p class="step__desc">Instala las dependencias necesarias</p>
+                            </div>
+                        </div>
+                        <div class="code-block">
+                            <button class="code-copy" data-copy="cd Haker-MCP && npm install">Copiar</button>
+                            <pre><code><span class="code-prompt">$</span> <span class="code-dir">cd Haker-MCP</span> && npm install</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step reveal">
+                        <div class="step__header">
+                            <div class="step__number">3</div>
+                            <div class="step__info">
+                                <h3 class="step__title">Compila y ejecuta</h3>
+                                <p class="step__desc">Compila TypeScript y arranca el servidor MCP</p>
+                            </div>
+                        </div>
+                        <div class="code-block">
+                            <button class="code-copy" data-copy="npm run build && node dist/index.js">Copiar</button>
+                            <pre><code><span class="code-prompt">$</span> npm run build && node dist/index.js</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal reveal" id="terminal">
+                    <div class="terminal__header">
+                        <div class="terminal__dot terminal__dot--red"></div>
+                        <div class="terminal__dot terminal__dot--yellow"></div>
+                        <div class="terminal__dot terminal__dot--green"></div>
+                        <span class="terminal__title">haker-mcp-terminal</span>
+                    </div>
+                    <div class="terminal__body" id="terminalBody">
+                        <div class="terminal__line"><span class="terminal__prompt">$</span> <span class="terminal__cmd">npm run build && node dist/index.js</span></div>
+                    </div>
+                    <div class="terminal__cursor-line">
+                        <span class="terminal__prompt">$</span>
+                        <span class="terminal__cursor" id="terminalCursor">▊</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIGURACIÓN MCP CLIENT -->
+        <section class="section section--dark" id="configuracion">
+            <div class="section__inner">
+                <h2 class="section__title reveal">Configuración del <span class="text-accent">Cliente MCP</span></h2>
+                <p class="section__subtitle reveal">Agrega Haker-MCP a tu cliente MCP favorito</p>
+
+                <div class="tabs reveal">
+                    <div class="tabs__nav">
+                        <button class="tabs__btn active" data-tab="cursor">Cursor</button>
+                        <button class="tabs__btn" data-tab="claude">Claude Desktop</button>
+                        <button class="tabs__btn" data-tab="windsurf">Windsurf</button>
+                    </div>
+                    <div class="tabs__content">
+                        <div class="tabs__panel active" id="tab-cursor">
+                            <p class="tabs__desc">En Cursor, ve a <strong>Settings → MCP Servers</strong> y agrega:</p>
+                            <div class="code-block code-block--json">
+                                <button class="code-copy" data-copy='{"mcpServers":{"haker-mcp":{"command":"node","args":["C:\\ruta\\completa\\Haker-MCP\\dist\\index.js"]}}}'>Copiar</button>
+                                <pre><code>{
+  <span class="code-key">"mcpServers"</span>: {
+    <span class="code-key">"haker-mcp"</span>: {
+      <span class="code-key">"command"</span>: <span class="code-str">"node"</span>,
+      <span class="code-key">"args"</span>: [<span class="code-str">"C:\\ruta\\completa\\Haker-MCP\\dist\\index.js"</span>]
+    }
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                        <div class="tabs__panel" id="tab-claude">
+                            <p class="tabs__desc">En Claude Desktop, edita el archivo de configuración MCP:</p>
+                            <div class="code-block code-block--json">
+                                <button class="code-copy" data-copy='{"mcpServers":{"haker-mcp":{"command":"node","args":["C:\\ruta\\completa\\Haker-MCP\\dist\\index.js"]}}}'>Copiar</button>
+                                <pre><code>{
+  <span class="code-key">"mcpServers"</span>: {
+    <span class="code-key">"haker-mcp"</span>: {
+      <span class="code-key">"command"</span>: <span class="code-str">"node"</span>,
+      <span class="code-key">"args"</span>: [<span class="code-str">"C:\\ruta\\completa\\Haker-MCP\\dist\\index.js"</span>]
+    }
+  }
+}</code></pre>
+                            </div>
+                            <p class="tabs__footnote">Archivo: <code>%APPDATA%\Claude\claude_desktop_config.json</code></p>
+                        </div>
+                        <div class="tabs__panel" id="tab-windsurf">
+                            <p class="tabs__desc">En Windsurf, agrega al archivo de configuración del proyecto:</p>
+                            <div class="code-block code-block--json">
+                                <button class="code-copy" data-copy='{"mcpServers":{"haker-mcp":{"command":"node","args":["C:\\ruta\\completa\\Haker-MCP\\dist\\index.js"]}}}'>Copiar</button>
+                                <pre><code>{
+  <span class="code-key">"mcpServers"</span>: {
+    <span class="code-key">"haker-mcp"</span>: {
+      <span class="code-key">"command"</span>: <span class="code-str">"node"</span>,
+      <span class="code-key">"args"</span>: [<span class="code-str">"C:\\ruta\\completa\\Haker-MCP\\dist\\index.js"</span>]
+    }
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS REFERENCE -->
+        <section class="section" id="tools">
+            <div class="section__inner">
+                <h2 class="section__title reveal">Referencia de <span class="text-accent">Tools</span></h2>
+                <p class="section__subtitle reveal">32 tools organizadas en 8 categorías. Busca lo que necesitas.</p>
+
+                <div class="tools-search reveal">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" id="toolSearch" class="search-input" placeholder="Buscar tool por nombre o descripción...">
+                </div>
+
+                <div class="tools-categories" id="toolsContainer">
+                    <!-- DESKTOP -->
+                    <div class="tool-category reveal" data-category="desktop">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4Z"/></svg>
+                            Desktop
+                            <span class="tool-count">5 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="mover_mouse Mouse mover cursor coordenadas x y">
+                                <div class="tool-item__header"><code class="tool-name">mover_mouse</code><span class="tool-badge">x, y</span></div>
+                                <p class="tool-item__desc">Mueve el cursor del mouse a coordenadas absolutas (x, y).</p>
+                            </div>
+                            <div class="tool-item" data-search="posicion_mouse Mouse posición cursor actual">
+                                <div class="tool-item__header"><code class="tool-name">posicion_mouse</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Obtiene la posición actual del cursor (x, y).</p>
+                            </div>
+                            <div class="tool-item" data-search="clic_mouse Mouse click izquierdo derecho medio doble">
+                                <div class="tool-item__header"><code class="tool-name">clic_mouse</code><span class="tool-badge">boton, doble</span></div>
+                                <p class="tool-item__desc">Click izquierdo, derecho o medio. Simple o doble.</p>
+                            </div>
+                            <div class="tool-item" data-search="arrastrar_mouse Mouse arrastrar drag">
+                                <div class="tool-item__header"><code class="tool-name">arrastrar_mouse</code><span class="tool-badge">x1, y1, x2, y2</span></div>
+                                <p class="tool-item__desc">Arrastra desde (x1,y1) hasta (x2,y2) con 20 pasos de interpolación.</p>
+                            </div>
+                            <div class="tool-item" data-search="desplazar_mouse Mouse scroll rueda arriba abajo">
+                                <div class="tool-item__header"><code class="tool-name">desplazar_mouse</code><span class="tool-badge">direccion, cantidad</span></div>
+                                <p class="tool-item__desc">Scroll vertical: arriba o abajo, con cantidad configurable.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SYSTEM -->
+                    <div class="tool-category reveal" data-category="system">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                            Sistema
+                            <span class="tool-count">8 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="ejecutar_comando terminal shell comando">
+                                <div class="tool-item__header"><code class="tool-name">ejecutar_comando</code><span class="tool-badge">comando</span></div>
+                                <p class="tool-item__desc">Ejecuta un comando en la terminal del sistema.</p>
+                            </div>
+                            <div class="tool-item" data-search="info_sistema sistema información hostname OS memoria">
+                                <div class="tool-item__header"><code class="tool-name">info_sistema</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Información del sistema: hostname, OS, uptime, memoria, CPUs.</p>
+                            </div>
+                            <div class="tool-item" data-search="captura_pantalla screenshot pantalla captura imagen base64 región">
+                                <div class="tool-item__header"><code class="tool-name">captura_pantalla</code><span class="tool-badge">region, formato</span></div>
+                                <p class="tool-item__desc">Captura la pantalla. Soporta región y formato base64 para LLMs.</p>
+                            </div>
+                            <div class="tool-item" data-search="abrir_navegador navegador browser url chrome edge">
+                                <div class="tool-item__header"><code class="tool-name">abrir_navegador</code><span class="tool-badge">url, navegador</span></div>
+                                <p class="tool-item__desc">Abre una URL en el navegador (chrome, edge, operagx).</p>
+                            </div>
+                            <div class="tool-item" data-search="leer_portapapeles clipboard portapapeles pegar">
+                                <div class="tool-item__header"><code class="tool-name">leer_portapapeles</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Lee el contenido actual del portapapeles.</p>
+                            </div>
+                            <div class="tool-item" data-search="escribir_portapapeles clipboard portapapeles copiar">
+                                <div class="tool-item__header"><code class="tool-name">escribir_portapapeles</code><span class="tool-badge">contenido</span></div>
+                                <p class="tool-item__desc">Escribe texto al portapapeles.</p>
+                            </div>
+                            <div class="tool-item" data-search="matar_proceso proceso kill PID nombre">
+                                <div class="tool-item__header"><code class="tool-name">matar_proceso</code><span class="tool-badge">pid, nombre</span></div>
+                                <p class="tool-item__desc">Termina un proceso por PID o nombre.</p>
+                            </div>
+                            <div class="tool-item" data-search="enviar_notificacion notificación notify">
+                                <div class="tool-item__header"><code class="tool-name">enviar_notificacion</code><span class="tool-badge">titulo, mensaje</span></div>
+                                <p class="tool-item__desc">Envía una notificación del sistema.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FILESYSTEM -->
+                    <div class="tool-category reveal" data-category="filesystem">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Filesystem
+                            <span class="tool-count">3 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="leer_archivo archivo leer file read">
+                                <div class="tool-item__header"><code class="tool-name">leer_archivo</code><span class="tool-badge">ruta</span></div>
+                                <p class="tool-item__desc">Lee el contenido de un archivo.</p>
+                            </div>
+                            <div class="tool-item" data-search="escribir_archivo archivo escribir file write">
+                                <div class="tool-item__header"><code class="tool-name">escribir_archivo</code><span class="tool-badge">ruta, contenido</span></div>
+                                <p class="tool-item__desc">Escribe contenido en un archivo.</p>
+                            </div>
+                            <div class="tool-item" data-search="listar_directorio directorio listar dir folder">
+                                <div class="tool-item__header"><code class="tool-name">listar_directorio</code><span class="tool-badge">ruta</span></div>
+                                <p class="tool-item__desc">Lista archivos y carpetas en un directorio.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MEMORY -->
+                    <div class="tool-category reveal" data-category="memory">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                            Memoria
+                            <span class="tool-count">4 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="memorizar memoria memory guardar recordar">
+                                <div class="tool-item__header"><code class="tool-name">memorizar</code><span class="tool-badge">clave, valor</span></div>
+                                <p class="tool-item__desc">Guarda información en la memoria persistente del agente.</p>
+                            </div>
+                            <div class="tool-item" data-search="recordar memoria memory recuperar">
+                                <div class="tool-item__header"><code class="tool-name">recordar</code><span class="tool-badge">clave</span></div>
+                                <p class="tool-item__desc">Recupera información guardada por su clave.</p>
+                            </div>
+                            <div class="tool-item" data-search="reflexionar reflexión resumen memoria">
+                                <div class="tool-item__header"><code class="tool-name">reflexionar</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Genera un resumen de todas las memorias guardadas.</p>
+                            </div>
+                            <div class="tool-item" data-search="crear_agente agente crear agente IA">
+                                <div class="tool-item__header"><code class="tool-name">crear_agente</code><span class="tool-badge">nombre, personalidad</span></div>
+                                <p class="tool-item__desc">Crea un sub-agente con personalidad personalizada.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUTOMATION -->
+                    <div class="tool-category reveal" data-category="automation">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>
+                            Automatización
+                            <span class="tool-count">3 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="generar_excel excel xlsx hoja cálculo">
+                                <div class="tool-item__header"><code class="tool-name">generar_excel</code><span class="tool-badge">ruta, datos, hoja</span></div>
+                                <p class="tool-item__desc">Crea un archivo Excel (.xlsx) desde datos JSON.</p>
+                            </div>
+                            <div class="tool-item" data-search="leer_pdf pdf leer extraer texto">
+                                <div class="tool-item__header"><code class="tool-name">leer_pdf</code><span class="tool-badge">ruta</span></div>
+                                <p class="tool-item__desc">Extrae texto de un archivo PDF.</p>
+                            </div>
+                            <div class="tool-item" data-search="organizar_escritorio escritorio desktop organizar archivos">
+                                <div class="tool-item__header"><code class="tool-name">organizar_escritorio</code><span class="tool-badge">ruta_escritorio</span></div>
+                                <p class="tool-item__desc">Organiza archivos del escritorio en carpetas por extensión.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECURITY -->
+                    <div class="tool-category reveal" data-category="security">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Seguridad
+                            <span class="tool-count">3 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="generar_hash hash md5 sha256">
+                                <div class="tool-item__header"><code class="tool-name">generar_hash</code><span class="tool-badge">texto, algoritmo</span></div>
+                                <p class="tool-item__desc">Genera hash MD5 de un texto.</p>
+                            </div>
+                            <div class="tool-item" data-search="quien_es_whois whois dominio ip">
+                                <div class="tool-item__header"><code class="tool-name">quien_es_whois</code><span class="tool-badge">dominio</span></div>
+                                <p class="tool-item__desc">Consulta WHOIS de un dominio.</p>
+                            </div>
+                            <div class="tool-item" data-search="escanear_red_completa red scan network wifi">
+                                <div class="tool-item__header"><code class="tool-name">escanear_red_completa</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Escanea redes Wi-Fi disponibles y sus detalles.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CLOUD -->
+                    <div class="tool-category reveal" data-category="cloud">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                            Cloud
+                            <span class="tool-count">2 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="docker_listar docker containers listar">
+                                <div class="tool-item__header"><code class="tool-name">docker_listar</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Lista contenedores Docker activos.</p>
+                            </div>
+                            <div class="tool-item" data-search="docker_logs docker logs ver">
+                                <div class="tool-item__header"><code class="tool-name">docker_logs</code><span class="tool-badge">contenedor_id</span></div>
+                                <p class="tool-item__desc">Obtiene los logs de un contenedor Docker.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FUN -->
+                    <div class="tool-category reveal" data-category="fun">
+                        <h3 class="tool-category__title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                            Fun
+                            <span class="tool-count">2 tools</span>
+                        </h3>
+                        <div class="tool-items">
+                            <div class="tool-item" data-search="reproducir_sonido sonido audio beep reproducir">
+                                <div class="tool-item__header"><code class="tool-name">reproducir_sonido</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Reproduce un pitido en el sistema.</p>
+                            </div>
+                            <div class="tool-item" data-search="chiste_hacker chiste humor hacker fun">
+                                <div class="tool-item__header"><code class="tool-name">chiste_hacker</code><span class="tool-badge">—</span></div>
+                                <p class="tool-item__desc">Cuenta un chiste de hackers. Porque programar también es divertido.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEGURIDAD -->
+        <section class="section section--dark" id="seguridad">
+            <div class="section__inner">
+                <h2 class="section__title reveal">Seguridad</h2>
+                <p class="section__subtitle reveal">Usa Haker-MCP de forma responsable</p>
+
+                <div class="security-grid">
+                    <div class="security-card reveal">
+                        <div class="security-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        </div>
+                        <h3 class="security-card__title">Riesgo de Inyección</h3>
+                        <p class="security-card__desc">Los LLMs pueden ser engañados para ejecutar comandos maliciosos si los datos contienen instrucciones ocultas.</p>
+                    </div>
+                    <div class="security-card reveal">
+                        <div class="security-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3 class="security-card__title">Entorno Aislado</h3>
+                        <p class="security-card__desc">Usa Haker-MCP solo en entornos de desarrollo con datos sintéticos, nunca en producción.</p>
+                    </div>
+                    <div class="security-card reveal">
+                        <div class="security-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <h3 class="security-card__title">Supervisión Humana</h3>
+                        <p class="security-card__desc">La mayoría de clientes MCP requieren aprobación manual para cada tool call. Mantén esto activado.</p>
+                    </div>
+                </div>
+
+                <div class="security-tips reveal">
+                    <h3>Buenas prácticas</h3>
+                    <ul class="security-list">
+                        <li class="security-list__item">
+                            <span class="security-list__num">01</span>
+                            <div><strong>No conectes a producción</strong> — Usa solo en entornos de desarrollo con datos de prueba.</div>
+                        </li>
+                        <li class="security-list__item">
+                            <span class="security-list__num">02</span>
+                            <div><strong>No compartas con usuarios finales</strong> — Es una herramienta de desarrollo interna.</div>
+                        </li>
+                        <li class="security-list__item">
+                            <span class="security-list__num">03</span>
+                            <div><strong>Precaución con comandos</strong> — Revisa siempre qué va a ejecutar el agente antes de aprobar.</div>
+                        </li>
+                        <li class="security-list__item">
+                            <span class="security-list__num">04</span>
+                            <div><strong>Protege la memoria</strong> — Los datos se guardan en <code>~/.haker_brain/</code>. No almacenes información sensible.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <span class="logo-icon">&gt;_</span>
+                <span class="logo-text">Haker<span class="text-accent">MCP</span></span>
+            </div>
+            <p class="footer__desc">Potencia tus agentes de IA con control total del sistema.</p>
+            <div class="footer__links">
+                <a href="https://github.com/KronoxYT/Haker-MCP" target="_blank" rel="noopener" class="footer__link">GitHub</a>
+                <a href="https://github.com/KronoxYT/Haker-MCP/issues" target="_blank" rel="noopener" class="footer__link">Issues</a>
+                <a href="https://github.com/KronoxYT/Haker-MCP/blob/main/LICENSE" target="_blank" rel="noopener" class="footer__link">MIT License</a>
+            </div>
+            <p class="footer__copy">Construido con el Protocolo MCP — 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
