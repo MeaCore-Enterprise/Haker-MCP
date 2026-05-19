@@ -4,17 +4,18 @@
    ============================================= */
 
 :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-card: #16161f;
-    --bg-card-hover: #1a1a26;
-    --border: #1e1e2e;
-    --border-hover: #2a2a3e;
+    --bg-primary: #0d0d14;
+    --bg-secondary: #141420;
+    --bg-code: #08080c;
+    --bg-card: #1a1a28;
+    --bg-card-hover: #1e1e30;
+    --border: #222236;
+    --border-hover: #2e2e48;
     --text-primary: #e4e4e7;
     --text-secondary: #a1a1aa;
     --text-muted: #71717a;
     --accent: #00ff88;
-    --accent-dim: rgba(0, 255, 136, 0.15);
+    --accent-dim: rgba(0, 255, 136, 0.12);
     --accent-border: rgba(0, 255, 136, 0.3);
     --cyan: #00d4ff;
     --red: #ff4444;
@@ -27,7 +28,8 @@
 
 [data-theme="light"] {
     --bg-primary: #f4f4f8;
-    --bg-secondary: #ffffff;
+    --bg-secondary: #e8e8f0;
+    --bg-code: #1a1a2e;
     --bg-card: #ffffff;
     --bg-card-hover: #f0f0f5;
     --border: #d4d4d8;
@@ -41,6 +43,12 @@
     --cyan: #0284c7;
 }
 
+[data-theme="light"] body {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -48,6 +56,10 @@ html { scroll-behavior: smooth; }
 body {
     font-family: var(--font-sans);
     background: var(--bg-primary);
+    background-image:
+        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
@@ -93,7 +105,7 @@ code {
     top: 0; left: 0; right: 0;
     z-index: 100;
     height: var(--header-h);
-    background: rgba(10, 10, 15, 0.8);
+    background: rgba(13, 13, 20, 0.85);
     backdrop-filter: blur(20px) saturate(1.5);
     border-bottom: 1px solid var(--border);
     transition: background .3s, border-color .3s;
@@ -186,6 +198,7 @@ code {
     justify-content: center;
     text-align: center;
     padding: 120px 24px 80px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(0, 255, 136, 0.04) 0%, transparent 60%);
 }
 
 .hero__badge {
@@ -403,6 +416,7 @@ code {
 
 .section--dark {
     background: var(--bg-secondary);
+    background-image: linear-gradient(180deg, rgba(0, 255, 136, 0.02) 0%, transparent 40%);
 }
 
 .section__inner {
@@ -688,7 +702,7 @@ code {
 
 .code-block {
     position: relative;
-    background: #0d0d14;
+    background: var(--bg-code);
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
@@ -764,7 +778,7 @@ code {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--border);
-    background: #0d0d14;
+    background: var(--bg-code);
 }
 
 .terminal__header {
