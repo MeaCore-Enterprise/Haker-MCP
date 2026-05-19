@@ -1,59 +1,62 @@
 {
-    "name": "haker-mcp",
-    "version": "1.1.0",
-    "description": "Un servidor MCP ultra potente — control de mouse, pantalla, sistema, archivos y más",
-    "type": "module",
-    "main": "dist/index.js",
-    "bin": {
-        "haker-mcp": "./dist/index.js"
-    },
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "build": "tsc",
-        "start": "node dist/index.js",
-        "prepublishOnly": "npm run build",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "mcp",
-        "modelcontextprotocol",
-        "desktop-automation",
-        "ai-agent",
-        "windows"
-    ],
-    "author": "",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/KronoxYT/Haker-MCP"
-    },
-    "os": [
-        "win32"
-    ],
-    "dependencies": {
-        "@modelcontextprotocol/sdk": "^1.0.1",
-        "archiver": "^7.0.1",
-        "axios": "^1.13.2",
-        "cheerio": "^1.1.2",
-        "clipboardy": "^4.0.0",
-        "jimp": "^1.6.0",
-        "md5": "^2.3.0",
-        "node-notifier": "^10.0.1",
-        "node-wifi": "^2.0.16",
-        "pdf-parse": "^2.4.5",
-        "screenshot-desktop": "^1.15.0",
-        "systeminformation": "^5.27.13",
-        "xlsx": "^0.18.5",
-        "zod": "^3.22.4"
-    },
-    "devDependencies": {
-        "@types/archiver": "^7.0.0",
-        "@types/md5": "^2.3.6",
-        "@types/node": "^20.10.0",
-        "@types/node-notifier": "^8.0.5",
-        "@types/node-wifi": "^2.0.2",
-        "typescript": "^5.3.0"
-    }
+  "name": "haker-mcp",
+  "version": "1.1.0",
+  "description": "Un servidor MCP ultra potente — control de mouse, pantalla, sistema, archivos y más",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "haker-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "desktop-automation",
+    "ai-agent",
+    "windows"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KronoxYT/Haker-MCP"
+  },
+  "os": [
+    "win32"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
+    "archiver": "^7.0.1",
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "clipboardy": "^4.0.0",
+    "jimp": "^1.6.0",
+    "md5": "^2.3.0",
+    "node-notifier": "^10.0.1",
+    "node-wifi": "^2.0.16",
+    "pdf-parse": "^2.4.5",
+    "screenshot-desktop": "^1.15.0",
+    "systeminformation": "^5.27.13",
+    "xlsx": "^0.18.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/archiver": "^7.0.0",
+    "@types/md5": "^2.3.6",
+    "@types/node": "^20.10.0",
+    "@types/node-notifier": "^8.0.5",
+    "@types/node-wifi": "^2.0.2",
+    "typescript": "^5.3.0",
+    "wrangler": "^4.93.0"
+  }
 }
