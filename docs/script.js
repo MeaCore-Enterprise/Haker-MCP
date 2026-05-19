@@ -3,6 +3,14 @@
 // Particles, animations, interactivity
 // =============================================
 
+// Fallback: Show all content immediately if JS loads but something fails
+setTimeout(() => {
+    document.querySelectorAll('.reveal.hidden').forEach(el => {
+        el.classList.remove('hidden');
+        el.classList.add('visible');
+    });
+}, 5000);
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========== PARTICLES BACKGROUND =========== */
@@ -151,12 +159,17 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========== SCROLL REVEAL =========== */
 
     const revealEls = document.querySelectorAll('.reveal');
+    
+    // Add hidden class initially so content is invisible before JS runs
+    revealEls.forEach(el => el.classList.add('hidden'));
+    
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, idx) => {
             if (entry.isIntersecting) {
                 const delay = Array.from(entry.target.parentElement.querySelectorAll('.reveal'))
                     .indexOf(entry.target) * 100;
                 setTimeout(() => {
+                    entry.target.classList.remove('hidden');
                     entry.target.classList.add('visible');
                 }, delay);
                 revealObserver.unobserve(entry.target);
